@@ -1,10 +1,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.abijithkrishna.hawabaaz.FoodMenuFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.abijithkrishna.hawabaaz.FoodMenuFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
+
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
@@ -12,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
         >
     </android.support.design.widget.TabLayout>
 

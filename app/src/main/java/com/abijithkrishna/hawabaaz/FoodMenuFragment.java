@@ -1,6 +1,7 @@
 package com.abijithkrishna.hawabaaz;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,6 +14,8 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
+import android.widget.Toast;
 
 
 /**
@@ -83,13 +86,34 @@ public class FoodMenuFragment extends Fragment {
         /**
          *Set an Apater for the View Pager
          */
+        //viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Toast.makeText(getActivity().getApplicationContext(), "testt",
+                        Toast.LENGTH_LONG).show();
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         /**
          * Now , this is a workaround ,
          * The setupWithViewPager dose't works without the runnable .
          * Maybe a Support Library Bug .
          */
+        tabLayout.setClickable(true);
+        tabLayout.setFocusableInTouchMode(true);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.post(new Runnable() {
             @Override
@@ -143,7 +167,8 @@ public class FoodMenuFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    class MyAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener,ActionBar.TabListener {
+    class MyAdapter extends FragmentPagerAdapter implements TabHost.TabContentFactory
+            , TabHost.OnTabChangeListener, DialogInterface.OnClickListener {
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -152,6 +177,8 @@ public class FoodMenuFragment extends Fragment {
         /**
          * Return fragment with respect to Position .
          */
+
+
 
         @Override
         public Fragment getItem(int position)
@@ -192,35 +219,22 @@ public class FoodMenuFragment extends Fragment {
             return null;
         }
 
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            Toast.makeText(getActivity().getApplicationContext(), which+dialog.toString(),
+                    Toast.LENGTH_LONG).show();
         }
 
         @Override
-        public void onPageSelected(int position) {
-
-
+        public void onTabChanged(String tabId) {
+            Toast.makeText(getActivity().getApplicationContext(), tabId,
+                    Toast.LENGTH_LONG).show();
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-        @Override
-        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-        }
-
-        @Override
-        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-        }
-
-        @Override
-        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
+        public View createTabContent(String tag) {
+            return null;
         }
     }
 
