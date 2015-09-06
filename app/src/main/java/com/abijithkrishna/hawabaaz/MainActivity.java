@@ -1,4 +1,4 @@
-package balakumaran.hawabazz_app;
+package com.abijithkrishna.hawabaaz;
 
 import android.app.Activity;
 
