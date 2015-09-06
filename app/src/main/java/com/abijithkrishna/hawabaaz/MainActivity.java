@@ -206,7 +206,10 @@ public class MainActivity extends AppCompatActivity
             actionBar.setTitle(titileStack.peek());
         }
         catch(Exception e){
+            Toast.makeText(getApplicationContext(), "ThankYou ComeAgain",
+                    Toast.LENGTH_LONG).show();
             System.out.println(e);
+            finish();
         }
         //actionBar.setTitle("Hawabazz");
         super.onBackPressed();
